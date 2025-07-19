@@ -1,0 +1,11 @@
+.env
+.env.safe
+.venv/
+uv.lock
+__pycache__/
+*.py[cod]
+.DS_Store
+analysis_report.md
+grading_report.md
+.vscode/
+.idea/

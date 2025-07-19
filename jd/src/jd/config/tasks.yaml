@@ -1,0 +1,41 @@
+job_research_task:
+  description: >
+    Research the given job description input {job_description}. Identify the key responsibilities, required skills, qualifications,
+    and any industry-specific expectations. Include insights from reliable sources.
+  expected_output: >
+    A clear summary of the job role, required technical and soft skills, domain expectations, and any special notes
+    relevant to evaluating a resume against this job.
+  agent: researcher
+
+resume_analysis_task:
+  description: >
+    Read and analyze each resume in the folder {folder_path} provided. Check for grammar, formatting, spelling, clarity of projects, and alignment
+    with job expectations. Highlight any strong or weak areas.
+  expected_output: >
+    A detailed resume analysis for each resume. The analysis must include strengths, weaknesses, formatting errors (if any),
+    project quality, certifications, and skill match with the job description.
+    Use only the content explicitly present in the resume — do not assume or generate additional details.
+    Your evaluation must focus strictly on how well the resume aligns with the job description based on actual evidence from the resume.
+    Output should be organized as a dictionary:
+    
+    {
+      'file name': 'analysis'
+    }
+  agent: resume_analyzer
+
+resume_grading_task:
+  description: >
+    You are given:
+      - a job description
+      - a dictionary of analysis reports (filename -> markdown summary)
+    Your job is to assign a score out of 10 to each resume based on how well it fits the job description.
+    Base the score strictly on the information provided in the analysis report.
+    Return a dictionary like this:
+    {
+      'resume1.pdf': { 'score': 7, 'reason': '...' },
+      'resume2.pdf': { 'score': 5, 'reason': '...' }
+    }
+    The dictionary should be sorted in descending order of ranks.
+  expected_output: >
+    A dictionary of resume scores and reasons for each score.
+  agent: grader
